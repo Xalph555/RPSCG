@@ -1,0 +1,286 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://src/Button/Button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/fonts/CenturySchoolbook.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/button/button_disable.png" type="Texture" id=3]
+[ext_resource path="res://assets/button/button_hover.png" type="Texture" id=4]
+[ext_resource path="res://assets/button/button_pressed.png" type="Texture" id=5]
+[ext_resource path="res://assets/button/button_normal.png" type="Texture" id=6]
+[ext_resource path="res://src/UI/ResultsUI.gd" type="Script" id=7]
+[ext_resource path="res://assets/sound/chipsStack1.ogg" type="AudioStream" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "menu_reveal"
+length = 1.2
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Title:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.2, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Title:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -437.266, -0.25, 0, 0.824263, -3.58517, 0, -0.401181, 67.3751, 0.223673, 25.0571 ),
+"times": PoolRealArray( 0.2, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Buttons:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.2, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Buttons:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 687.774, -0.25, 0, 0.563711, -3.70178, 0, -0.457592, -162.958, 0.25, 0 ),
+"times": PoolRealArray( 0.2, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("BackgroundResults:rect_position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( -1964.03, -0.25, 0, 0.583236, 1.71448, -2.129, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("BackgroundResults:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("AudioStreamPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 0.169961,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+}, {
+"end_offset": 0.166383,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+} ],
+"times": PoolRealArray( 0.7, 0.8 )
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 518, 142 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 518, 142 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 518, 142 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 518, 142 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 46
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="ResultsUI" type="Control"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/menu_reveal = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -15.0
+bus = "Sound"
+
+[node name="AudioStreamResult" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+bus = "ResultSound"
+
+[node name="BackgroundResults" type="ColorRect" parent="."]
+anchor_right = 48.052
+anchor_bottom = 27.004
+margin_left = -1964.03
+margin_right = -1960.11
+margin_bottom = 1.83997
+color = Color( 0.160784, 0.164706, 0.152941, 0.439216 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Control" parent="."]
+margin_top = -437.266
+margin_right = 40.0
+margin_bottom = -397.266
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundTitle" type="ColorRect" parent="Title"]
+anchor_right = 48.173
+anchor_bottom = 26.97
+margin_left = 711.0
+margin_top = 243.0
+margin_right = -718.92
+margin_bottom = -696.8
+color = Color( 0.160784, 0.164706, 0.152941, 0.792157 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleWin" type="Label" parent="Title"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 724.806
+margin_top = 230.154
+margin_right = 1154.81
+margin_bottom = 351.154
+custom_fonts/font = SubResource( 2 )
+text = "You Win!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLose" type="Label" parent="Title"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 717.835
+margin_top = 230.154
+margin_right = 1169.84
+margin_bottom = 351.154
+custom_fonts/font = SubResource( 2 )
+text = "You Lose!"
+
+[node name="TitleDraw" type="Label" parent="Title"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 797.252
+margin_top = 230.267
+margin_right = 1083.25
+margin_bottom = 351.267
+custom_fonts/font = SubResource( 2 )
+text = "Draw!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="."]
+margin_top = 687.774
+margin_right = 40.0
+margin_bottom = 727.774
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundButton" type="ColorRect" parent="Buttons"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 782.0
+margin_top = 448.0
+margin_right = 1097.0
+margin_bottom = 792.0
+color = Color( 0.160784, 0.164706, 0.152941, 0.686275 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonPlay" parent="Buttons" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 796.431
+margin_top = 465.965
+margin_right = 1083.43
+margin_bottom = 575.965
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
+text = "Play Again"
+
+[node name="ButtonMM" parent="Buttons" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 796.431
+margin_top = 662.184
+margin_right = 1083.43
+margin_bottom = 772.184
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
+text = "Main Menu"
+
+[connection signal="pressed" from="Buttons/ButtonPlay" to="." method="_on_ButtonPlay_pressed"]
+[connection signal="pressed" from="Buttons/ButtonMM" to="." method="_on_ButtonMM_pressed"]

@@ -1,0 +1,422 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://src/Button/Button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Button/ButtonMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/CenturySchoolbook.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/board/board_header.png" type="Texture" id=4]
+[ext_resource path="res://assets/button/button_disable.png" type="Texture" id=5]
+[ext_resource path="res://src/UI/GameUI.gd" type="Script" id=6]
+[ext_resource path="res://assets/button/button_hover.png" type="Texture" id=7]
+[ext_resource path="res://assets/button/button_pressed.png" type="Texture" id=8]
+[ext_resource path="res://assets/button/button_normal.png" type="Texture" id=9]
+[ext_resource path="res://assets/button/button_menu_pressed.png" type="Texture" id=10]
+[ext_resource path="res://src/Button/ButtonMusic.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Button/ButtonSound.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/sound/chipsStack1.ogg" type="AudioStream" id=13]
+
+[sub_resource type="Animation" id=1]
+resource_name = "phase_title_appear"
+length = 3.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("TitlePhaseLarge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.3, 1.1, 2.3, 3.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("TitlePhaseLarge:rect_position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.1, 2.3, 3.1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("TitlePhaseLarge:rect_position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 612.938, -0.25, 0, 0.25, 0, 0, -0.42248, -163.978, 0.25, 0, 0, -0.25, 0, 0.369931, -125.461, 613.518, -0.244379, 26.0222, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.1, 2.3, 3.1 )
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 13 )
+} ],
+"times": PoolRealArray( 1 )
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 55
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 80
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 10 )
+region_rect = Rect2( 0, 0, 269, 78 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+
+[sub_resource type="StyleBoxTexture" id=7]
+
+[sub_resource type="DynamicFont" id=8]
+size = 45
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 100
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 28
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 36
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 50
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxTexture" id=13]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 518, 142 )
+
+[sub_resource type="StyleBoxTexture" id=14]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 518, 142 )
+
+[sub_resource type="StyleBoxTexture" id=15]
+
+[sub_resource type="StyleBoxTexture" id=16]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 518, 142 )
+
+[sub_resource type="StyleBoxTexture" id=17]
+texture = ExtResource( 9 )
+region_rect = Rect2( 0, 0, 518, 142 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 32
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="GameUI" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/phase_title_appear = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -15.0
+bus = "Sound"
+
+[node name="Header" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -23.8878
+margin_top = -2.0
+margin_right = 1900.11
+margin_bottom = 216.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitlePhase" type="Label" parent="."]
+margin_left = 228.877
+margin_top = 32.4297
+margin_right = 603.877
+margin_bottom = 99.4297
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.737255, 0.745098, 0.737255, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScorePlayer" type="Label" parent="."]
+margin_left = 664.015
+margin_top = 7.80298
+margin_right = 754.015
+margin_bottom = 104.803
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.737255, 0.745098, 0.737255, 1 )
+text = "0"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreAI" type="Label" parent="."]
+margin_left = 1162.84
+margin_top = 7.80298
+margin_right = 1252.84
+margin_bottom = 104.803
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.737255, 0.745098, 0.737255, 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonMenu" parent="." instance=ExtResource( 2 )]
+margin_left = 1667.94
+margin_top = 16.0362
+margin_right = 1904.94
+margin_bottom = 99.0362
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
+
+[node name="MarkerPos" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResultMarker0" type="Control" parent="MarkerPos"]
+margin_left = 715.938
+margin_top = 609.802
+margin_right = 715.938
+margin_bottom = 609.802
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResultMarker1" type="Control" parent="MarkerPos"]
+margin_left = 959.926
+margin_top = 609.802
+margin_right = 959.926
+margin_bottom = 609.802
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResultMarker2" type="Control" parent="MarkerPos"]
+margin_left = 1208.08
+margin_top = 609.802
+margin_right = 1208.08
+margin_bottom = 609.802
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Markers" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitlePhaseLarge" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 612.938
+margin_right = 40.0
+margin_bottom = 652.938
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundButton" type="ColorRect" parent="TitlePhaseLarge"]
+anchor_left = 1.33484
+anchor_right = 2.33484
+anchor_bottom = 1.0
+margin_left = 458.606
+margin_top = 490.0
+margin_right = 1315.61
+margin_bottom = 596.0
+color = Color( 0.160784, 0.164706, 0.152941, 0.854902 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLarge" type="Label" parent="TitlePhaseLarge"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 502.0
+margin_top = 481.0
+margin_right = 1377.0
+margin_bottom = 602.0
+custom_fonts/font = SubResource( 9 )
+text = "Current Phase"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeckPlayer" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CountDeck" type="Label" parent="DeckPlayer"]
+margin_left = 1634.94
+margin_top = 950.049
+margin_right = 1666.94
+margin_bottom = 985.049
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CountDiscard" type="Label" parent="DeckPlayer"]
+margin_left = 1634.94
+margin_top = 976.996
+margin_right = 1666.94
+margin_bottom = 1012.0
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeckAI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CountDeck" type="Label" parent="DeckAI"]
+margin_left = 361.326
+margin_top = 498.519
+margin_right = 393.326
+margin_bottom = 533.519
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CountDiscard" type="Label" parent="DeckAI"]
+margin_left = 361.326
+margin_top = 525.466
+margin_right = 393.326
+margin_bottom = 560.466
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitlePlayCards" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 420.0
+margin_top = 191.0
+margin_right = 1454.0
+margin_bottom = 282.0
+custom_fonts/font = SubResource( 11 )
+text = "Play your cards 
+(select a card from your hand then select a place on the board)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleSwapIndi" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 508.0
+margin_top = 212.0
+margin_right = 1378.0
+margin_bottom = 273.0
+custom_fonts/font = SubResource( 12 )
+text = "Select two cards on the board to swap"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonSwap" parent="." instance=ExtResource( 1 )]
+visible = false
+margin_left = 1103.43
+margin_top = 927.0
+margin_right = 1319.43
+margin_bottom = 988.0
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 14 )
+custom_styles/focus = SubResource( 15 )
+custom_styles/disabled = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
+text = "Swap Cards"
+
+[node name="ButtonSkipSwap" parent="." instance=ExtResource( 1 )]
+visible = false
+margin_left = 603.176
+margin_top = 927.0
+margin_right = 819.176
+margin_bottom = 988.0
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 14 )
+custom_styles/focus = SubResource( 15 )
+custom_styles/disabled = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
+text = "Skip Swap"
+
+[node name="ButtonSound" parent="." instance=ExtResource( 12 )]
+margin_left = 1390.55
+margin_top = 20.3566
+margin_right = 1467.55
+margin_bottom = 97.3566
+
+[node name="ButtonMusic" parent="." instance=ExtResource( 11 )]
+margin_left = 1496.71
+margin_top = 18.6648
+margin_right = 1573.71
+margin_bottom = 95.6648
+
+[connection signal="pressed" from="ButtonMenu" to="." method="_on_ButtonMenu_pressed"]

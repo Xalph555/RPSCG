@@ -1,0 +1,48 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/button/button_menu.png" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/CenturySchoolbook.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/button/button_menu_pressed.png" type="Texture" id=3]
+[ext_resource path="res://assets/sound/buttons/button_click.ogg" type="AudioStream" id=4]
+[ext_resource path="res://src/Button/ButtonMenu.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxTexture" id=1]
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 269, 78 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+
+[sub_resource type="StyleBoxTexture" id=4]
+
+[sub_resource type="DynamicFont" id=5]
+size = 45
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="ButtonMenu" type="Button"]
+margin_left = 0.561279
+margin_right = 250.561
+margin_bottom = 83.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.741176, 0.74902, 0.741176, 1 )
+custom_colors/font_color_hover = Color( 0.741176, 0.74902, 0.741176, 1 )
+custom_colors/font_color_pressed = Color( 0.741176, 0.74902, 0.741176, 1 )
+text = "Menu"
+icon = ExtResource( 1 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -15.0
+bus = "Sound"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

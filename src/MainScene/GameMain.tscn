@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/MainScene/Game.gd" type="Script" id=1]
+[ext_resource path="res://assets/board/board.png" type="Texture" id=2]
+[ext_resource path="res://src/MainScene/FieldSpaceArea/FieldSpaceArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Phases/PhaseDraw.gd" type="Script" id=4]
+[ext_resource path="res://src/Phases/PhaseAIPlay.gd" type="Script" id=5]
+[ext_resource path="res://src/Phases/PhasePlayerPlay.gd" type="Script" id=6]
+[ext_resource path="res://src/Phases/PhaseReveal.gd" type="Script" id=7]
+[ext_resource path="res://src/Phases/PhaseSwap.gd" type="Script" id=8]
+[ext_resource path="res://src/Phases/PhaseResults.gd" type="Script" id=9]
+[ext_resource path="res://src/UI/ResultsUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/UI/GameUI.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/UI/UI.gd" type="Script" id=19]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Board" type="Sprite" parent="."]
+position = Vector2( 960.014, 539.683 )
+z_index = -5
+texture = ExtResource( 2 )
+
+[node name="GamePhases" type="Node2D" parent="."]
+
+[node name="PhaseDraw" type="Node2D" parent="GamePhases"]
+script = ExtResource( 4 )
+
+[node name="PhaseAIPlay" type="Node2D" parent="GamePhases"]
+script = ExtResource( 5 )
+
+[node name="PhasePlayerPlay" type="Node2D" parent="GamePhases"]
+script = ExtResource( 6 )
+
+[node name="PhaseReveal" type="Node2D" parent="GamePhases"]
+script = ExtResource( 7 )
+
+[node name="PhaseSwap" type="Node2D" parent="GamePhases"]
+script = ExtResource( 8 )
+
+[node name="PhaseResults" type="Node2D" parent="GamePhases"]
+script = ExtResource( 9 )
+
+[node name="BoardPositions" type="Node2D" parent="."]
+
+[node name="PlayerHandStart" type="Position2D" parent="BoardPositions"]
+position = Vector2( 92.7138, 1052.78 )
+
+[node name="AIHandStart" type="Position2D" parent="BoardPositions"]
+position = Vector2( 1831.67, 171.373 )
+
+[node name="DeckPlayer" type="Position2D" parent="BoardPositions"]
+position = Vector2( 1595.85, 834.868 )
+
+[node name="DeckAI" type="Position2D" parent="BoardPositions"]
+position = Vector2( 323.549, 384.144 )
+
+[node name="FieldPlayer0" type="Position2D" parent="BoardPositions"]
+position = Vector2( 715.938, 776.063 )
+
+[node name="FieldPlayer1" type="Position2D" parent="BoardPositions"]
+position = Vector2( 959.926, 776.063 )
+
+[node name="FieldPlayer2" type="Position2D" parent="BoardPositions"]
+position = Vector2( 1208.08, 776.063 )
+
+[node name="FieldAI0" type="Position2D" parent="BoardPositions"]
+position = Vector2( 715.938, 443.205 )
+
+[node name="FieldAI1" type="Position2D" parent="BoardPositions"]
+position = Vector2( 959.926, 443.205 )
+
+[node name="FieldAI2" type="Position2D" parent="BoardPositions"]
+position = Vector2( 1208.08, 443.205 )
+
+[node name="DiscardPlayer" type="Position2D" parent="BoardPositions"]
+position = Vector2( 2107.6, 775.685 )
+
+[node name="DiscardAI" type="Position2D" parent="BoardPositions"]
+position = Vector2( 2114.41, 446.43 )
+
+[node name="FieldSpaces" type="Node2D" parent="."]
+z_index = -1
+
+[node name="FieldSpaceArea0" parent="FieldSpaces" instance=ExtResource( 3 )]
+position = Vector2( 715.423, 776.223 )
+
+[node name="FieldSpaceArea1" parent="FieldSpaces" instance=ExtResource( 3 )]
+position = Vector2( 960.106, 776.223 )
+field_position = 1
+
+[node name="FieldSpaceArea2" parent="FieldSpaces" instance=ExtResource( 3 )]
+position = Vector2( 1208.55, 776.223 )
+field_position = 2
+
+[node name="BoardUI" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="BoardUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameUI" parent="BoardUI/UI" instance=ExtResource( 13 )]
+
+[node name="ResultsUI" parent="BoardUI/UI" instance=ExtResource( 11 )]
+
+[node name="PauseUI" parent="BoardUI/UI" instance=ExtResource( 12 )]
+pause_mode = 2
+
+[connection signal="space_selected" from="FieldSpaces/FieldSpaceArea0" to="GamePhases/PhasePlayerPlay" method="_on_FieldSpaceArea_space_selected"]
+[connection signal="space_selected" from="FieldSpaces/FieldSpaceArea1" to="GamePhases/PhasePlayerPlay" method="_on_FieldSpaceArea_space_selected"]
+[connection signal="space_selected" from="FieldSpaces/FieldSpaceArea2" to="GamePhases/PhasePlayerPlay" method="_on_FieldSpaceArea_space_selected"]
+[connection signal="pressed" from="BoardUI/UI/GameUI/ButtonSwap" to="GamePhases/PhaseSwap" method="_on_ButtonSwap_pressed"]
+[connection signal="pressed" from="BoardUI/UI/GameUI/ButtonSkipSwap" to="GamePhases/PhaseSwap" method="_on_ButtonSwap_pressed"]
+
+[editable path="BoardUI/UI/GameUI"]
